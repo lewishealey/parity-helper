@@ -24,16 +24,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.className} ${spaceMono.variable} p-2 bg-gray-100`}
-      >
-        <div className="min-h-screen rounded-3xl" style={{
+        className={`${inter.className} ${spaceMono.variable} p-8 bg-gray-100 min-h-screen`}
+        style={{
           backgroundImage:
             'url("https://hebbkx1anhila5yf.public.blob.vercel-storage.com/bg-vibrant.jpg-kRmtEuMm6ptlG5niYunkjILIxuc83L.jpeg")',
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
           minHeight: "100vh",
-        }}>{children}</div>
+        }}
+      >
+        <div className="rounded-3xl bg-white overflow-hidden max-w-7xl mx-auto">{children}</div>
       </body>
     </html>
   )

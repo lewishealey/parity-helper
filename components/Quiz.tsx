@@ -7,18 +7,18 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Label } from "@/components/ui/label"
 import { Card } from "@/components/ui/card"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { AlertCircle, ArrowLeft } from "lucide-react"
+import { AlertCircle, ArrowLeft, RefreshCw } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 
 const questions = [
   {
-    question: "How often do you update your design files?",
+    question: "Is your {Component} using design tokens?",
     options: [
-      { text: "After every code change", score: 10 },
-      { text: "Weekly", score: 7 },
-      { text: "Monthly", score: 5 },
-      { text: "Rarely", score: 2 },
+      { text: "Yes, everything is design tokens", score: 10 },
+      { text: "Everything that is tokenized in code is", score: 8 },
+      { text: "A mixture, some have tokens some don't", score: 5 },
+      { text: "Not at all", score: 2 },
     ],
     image: null,
   },
@@ -58,6 +58,7 @@ export default function Quiz() {
   const [selectedOption, setSelectedOption] = useState<number | null>(null)
   const [error, setError] = useState<string | null>(null)
 
+  console.log("selectedOption", selectedOption)
   const name = searchParams.get("name") || ""
   const componentName = searchParams.get("componentName") || ""
   const company = searchParams.get("company") || ""
@@ -146,31 +147,29 @@ export default function Quiz() {
   }
 
   return (
-    <Card className="max-w-6xl mx-auto overflow-hidden">
+    <div className="overflow-hidden border-none">
       <div className="flex flex-col md:flex-row">
-        <div className="md:w-1/2 bg-gradient-to-br from-blue-50 to-indigo-100 p-8 space-y-6">
-          <Link href="/" className="inline-flex items-center text-indigo-600 hover:text-indigo-800">
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Homepage
+        <div className="md:w-1/2 bg-gradient-to-br from-gray-100 to-gray-200
+       p-16 space-y-8 rounded-2xl overflow-hidden">
+          <Link href="/" className="inline-flex items-center text-gray-900 hover:text-indigo-800">
+            <RefreshCw className="w-4 h-4 mr-2" />
+            Restart
           </Link>
-          <div className="space-y-4">
-            <p className="text-indigo-600">step {currentQuestion + 1}/3</p>
-            <h2 className="text-4xl font-bold text-gray-900">{questions[currentQuestion].question}</h2>
-            <p className="text-gray-500">Select one answer</p>
-          </div>
-          <div className="mt-auto pt-8">
-            <p className="text-indigo-600 font-space-mono">{componentName}</p>
+          <div className="space-y-8">
+            <p className="text-gray-600 font-space-mono">Step {currentQuestion + 1}/3</p>
+            <h2 className="text-5xl font-bold text-gray-800" style={{ lineHeight: "125%"}}>{questions[currentQuestion].question.replace("{Component}",componentName)}</h2>
+            <p className="text-gray-500 text-xl">Select one answer</p>
           </div>
         </div>
-        <div className="md:w-1/2 bg-white p-8 space-y-6">
+        <div className="md:w-1/2 bg-white p-16 space-y-8">
           <RadioGroup
             value={selectedOption?.toString()}
             onValueChange={(value) => setSelectedOption(Number.parseInt(value))}
             className="space-y-4"
           >
             {questions[currentQuestion].options.map((option, index) => (
-              <div key={index} className="border rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer">
-                <RadioGroupItem value={option.score.toString()} id={`option-${index}`} className="peer sr-only" />
+              <div key={index} className={`border border-gray-300 rounded-xl p-4 hover:bg-gray-50 hover:border-gray-500 transition-colors cursor-pointer ${selectedOption === option.score ? 'bg-gray-100 border-black': ''}`}>
+                <RadioGroupItem value={option.score.toString()} id={`option-${index}`} className="peer sr-only rounded-xl" />
                 <Label
                   htmlFor={`option-${index}`}
                   className="flex items-center space-x-3 cursor-pointer text-lg font-medium"
@@ -181,21 +180,19 @@ export default function Quiz() {
             ))}
           </RadioGroup>
           <div className="flex justify-between pt-4">
-            <Button
+            <button
               onClick={handlePrevious}
-              disabled={currentQuestion === 0}
-              variant="outline"
-              className="font-space-mono"
+              className={`font-space-mono text-black py-4 px-8 rounded-xl ${(selectedOption === null && currentQuestion === 0) ? 'text-gray-400' : 'hover:bg-gray-200 text-black'}`}
             >
               Previous
-            </Button>
-            <Button
+            </button>
+            <button
               onClick={handleNext}
               disabled={selectedOption === null}
-              className="bg-black hover:bg-gray-900 font-space-mono"
+              className={`font-space-mono py-4 px-8 rounded-xl ${selectedOption === null ? 'bg-gray-200 text-gray-400' :'bg-black hover:bg-gray-900 text-white'}`}
             >
               {currentQuestion < questions.length - 1 ? "Next" : "Finish"}
-            </Button>
+            </button>
           </div>
           {questions[currentQuestion].image && (
             <div className="mt-8">
@@ -214,7 +211,7 @@ export default function Quiz() {
           )}
         </div>
       </div>
-    </Card>
+    </div>
   )
 }
 

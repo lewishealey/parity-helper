@@ -68,7 +68,7 @@ export default function ResultsDisplay({ id }: { id: string }) {
   }
 
   return (
-    <Card className="p-8 space-y-8 max-w-2xl mx-auto bg-gradient-to-br from-blue-50 to-indigo-100">
+    <div className="p-8 space-y-8 bg-gradient-to-br from-blue-50 to-indigo-100">
       <div>
         <h2 className="text-3xl font-bold text-indigo-800 mb-4">Results for {results.name}</h2>
         <p className="text-xl text-gray-700">Component: {results.componentName}</p>
@@ -95,7 +95,7 @@ export default function ResultsDisplay({ id }: { id: string }) {
       >
         Copy Results Link
       </Button>
-    </Card>
+    </div>
   )
 }
 
