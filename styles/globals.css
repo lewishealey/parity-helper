@@ -92,3 +92,10 @@ body {
     @apply bg-background text-foreground;
   }
 }
+html.dark body {
+  background-image: url("/lofi-bg-dark.jpg") !important;
+}
+
+input::placeholder {
+  color: gray
+}

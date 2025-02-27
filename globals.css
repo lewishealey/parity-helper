@@ -1,0 +1,5 @@
+/* Remove the bg-blur class */
+.bg-blur {
+  /* filter: blur(8px); */
+  /* opacity: 0.5; */
+}

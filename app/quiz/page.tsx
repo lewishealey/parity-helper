@@ -4,7 +4,7 @@ import { Card } from "@/components/ui/card"
 
 export default function QuizPage() {
   return (
-    <main className="p-8">
+    <main className="flex items-center justify-center h-full">
       <Suspense
         fallback={
           <div className="p-6">

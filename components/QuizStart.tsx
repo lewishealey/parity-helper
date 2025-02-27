@@ -50,6 +50,7 @@ export default function QuizStart() {
   const [name, setName] = useState("")
   const [componentName, setComponentName] = useState("")
   const [company, setCompany] = useState("")
+  const [getStarted, setGetStarted] = useState(false)
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -57,29 +58,31 @@ export default function QuizStart() {
     router.push(`/quiz?${queryParams}`)
   }
 
+  if(getStarted) {
+
   return (
-    <div className="flex flex-col w-full">
-      <div className="flex-1 p-8">
-        <div className="h-full min-h-full flex flex-col p-8 space-y-8 bg-gray-200 rounded-2xl">
-          <h2 className="text-4xl font-mono text-gray-900 mb-6">Component parity assessment</h2>
-          <p className="text-xl text-gray-900">Check the parity your Figma component has with its code counterpart in with this quiz </p>
-          <p className="text-gray-900">👉🏻 Brought to you by <a href="https://designsystemdiaries.com/" className="underline">Design system Diaries</a></p>
-        </div>
-      </div>
-      <div className="bg-white p-4 flex-1 justify-center flex flex-col p-8">
+    <div
+      className="max-w-lg min-h-[50vh]" style={{
+        background: 'linear-gradient(to right, #FF5722, #0063C0, #9C27B0)',
+        padding: '6px',
+        borderRadius: 20
+      }}>
+      <div className="border-none bg-white dark:bg-gray-800 rounded-2xl p-8 h-full border borde-4">
         <form onSubmit={handleSubmit} className="space-y-6">
+            <h2 className="text-5xl font-black text-black dark:text-white text-center" style={{ lineHeight: "125%" }}>Before we start</h2>
+          <p className="text-2xl text-black dark:text-gray-300 text-center" style={{ lineHeight: "125%" }}>Lets get a little info about you and the component you're checking.</p>
           <div>
-            <label htmlFor="componentName" className="block text-lg font-medium text-gray-700 mb-2">
-              Component Name (requird)
+            <label htmlFor="componentName" className="block text-lg font-medium text-gray-700 dark:text-gray-300 mb-2">
+              Component Name (required)
             </label>
             <Input
               type="text"
-              list="design-system-components" 
+              list="design-system-components"
               id="componentName"
               value={componentName}
               onChange={(e) => setComponentName(e.target.value)}
               required
-              className="w-full p-3 text-lg rounded-lg"
+              className="w-full px-6 py-4 text-lg rounded-lg placeholder-gray-500 dark:bg-gray-900"
               placeholder="Button Component"
             />
             <datalist id="design-system-components">
@@ -89,7 +92,7 @@ export default function QuizStart() {
             </datalist>
           </div>
           <div>
-            <label htmlFor="name" className="block text-lg font-medium text-gray-700 mb-2">
+            <label htmlFor="name" className="block text-lg font-medium text-gray-700 dark:text-gray-300 mb-2">
               Your Name
             </label>
             <Input
@@ -97,12 +100,12 @@ export default function QuizStart() {
               id="name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full p-3 text-lg rounded-lg"
+              className="w-full px-6 py-4 text-lg rounded-lg placeholder-gray-500 dark:bg-gray-900"
               placeholder="John Doe"
             />
           </div>
           <div>
-            <label htmlFor="company" className="block text-lg font-medium text-gray-700 mb-2">
+            <label htmlFor="company" className="block text-lg font-medium text-gray-700 dark:text-gray-300 mb-2 ">
               Company
             </label>
             <Input
@@ -110,18 +113,47 @@ export default function QuizStart() {
               id="company"
               value={company}
               onChange={(e) => setCompany(e.target.value)}
-              className="w-full p-3 text-lg rounded-lg"
+              className="w-full px-6 py-4 text-lg rounded-lg placeholder-gray-500 dark:bg-gray-900"
               placeholder="Acme Inc."
             />
           </div>
-          <Button
+          <button
             type="submit"
-            className="w-full py-3 text-xl text-white bg-black hover:bg-gray-900 transition-colors font-space-mono rounded overflow-hidden"
+            className="w-full py-3 text-xl text-white bg-black dark:bg-gray-700 hover:bg-gray-900 dark:hover:bg-gray-600 transition-colors font-space-mono rounded-xl text-xl"
           >
-            Start Quiz
-          </Button>
+            Next
+          </button>
         </form>
       </div>
+    </div>
+  )
+}
+
+  return ( 
+    <div 
+      className="max-w-lg min-h-[50vh]" style={{
+        background: 'linear-gradient(to right, #FF5722, #0063C0, #9C27B0)',
+        padding: '6px',
+        borderRadius: 20
+      }}>
+    <div className="border-none bg-white dark:bg-gray-800 rounded-2xl p-8 h-full border borde-4">
+      <div className="flex flex-col items-scenter justify-center space-y-8">
+        <div className="relative p-0 space-y-8 rounded-2xl flex flex-col justify-between items-center">
+            <img src="/parity-pals.png" alt="Design System Diaries" className="w-full" />
+              <h2 className="text-5xl font-black text-black dark:text-white" style={{ lineHeight: "125%" }}>Parity Booster</h2>
+            <p className="text-2xl text-black dark:text-gray-300 text-center" style={{ lineHeight: "125%" }}>Lets bring design and code together. Evaluate the code parity of your Design System’s Figma components and get actionable improvement suggestions.</p><button
+                type="submit"
+                className="w-full py-4 text-2xl font-bold text-white bg-black dark:bg-gray-700 hover:bg-gray-900 dark:hover:bg-gray-600 transition-colors rounded-xl text-xl"
+                onClick={() => setGetStarted(true)}
+              >
+                Check your parity
+              </button>
+                <div className="text-xl dark:text-gray-300">Brought to you by <a href="https://designsystemdiaries.com/" className="underline">Design system Diaries</a></div>
+
+        </div>
+        
+      </div>
+    </div>
     </div>
   )
 }

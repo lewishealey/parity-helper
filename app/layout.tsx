@@ -1,7 +1,7 @@
 import type React from "react"
 import type { Metadata } from "next"
 import { Inter, Space_Mono } from "next/font/google"
-import "./globals.css"
+import "../styles/globals.css"
 
 const inter = Inter({ subsets: ["latin"] })
 const spaceMono = Space_Mono({
@@ -24,22 +24,20 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.className} ${spaceMono.variable} p-8 bg-gray-100 min-h-screen`}
+        className={`${inter.className} ${spaceMono.variable} p-2 lg:p-8 min-h-screen flex items-center justify-center`}
         style={{
           backgroundImage:
-            'url("https://hebbkx1anhila5yf.public.blob.vercel-storage.com/bg-vibrant.jpg-kRmtEuMm6ptlG5niYunkjILIxuc83L.jpeg")',
+            'url("lofi-bg.jpg")',
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
           minHeight: "100vh",
         }}
       >
-        <div className="rounded-3xl bg-white overflow-hidden max-w-7xl mx-auto">{children}</div>
+        <div className="bg-white dark:bg-gray-800 mx-auto min-h-[50vh]" style={{ borderRadius: 40 }}>{children}</div>
       </body>
     </html>
   )
 }
-
-
 
 import './globals.css'
