@@ -2,6 +2,7 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Inter, Space_Mono } from "next/font/google"
 import "../styles/globals.css"
+import './globals.css'
 
 const inter = Inter({ subsets: ["latin"] })
 const spaceMono = Space_Mono({
@@ -10,10 +11,13 @@ const spaceMono = Space_Mono({
   variable: "--font-space-mono",
 })
 
+// Add default metadata
 export const metadata: Metadata = {
-  title: "Design-Code Parity Quiz",
-  description: "Evaluate your design and code alignment",
-    generator: 'v0.dev'
+  title: {
+    template: '%s | Parity Helper',
+    default: 'Parity Helper - Design System Parity Booster',
+  },
+  description: 'Evaluate the code parity of your Design System\'s Figma components and get actionable improvement suggestions',
 }
 
 export default function RootLayout({
@@ -39,5 +43,3 @@ export default function RootLayout({
     </html>
   )
 }
-
-import './globals.css'
